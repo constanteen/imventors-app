@@ -6,8 +6,8 @@ export default function AddButton() {
       </g>
       <path d="M37.38 22.68H31.32V28.74H28.68V22.68H22.62V20.01H28.68V13.95H31.32V20.01H37.38V22.68Z" fill="white"/>
       <defs>
-      <filter id="filter0_d_659_20" x="0" y="1" width="60" height="60" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <filter id="filter0_d_659_20" x="0" y="1" width="60" height="60" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+      <feFlood floodOpacity="0" result="BackgroundImageFix"/>
       <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
       <feOffset dy="10"/>
       <feGaussianBlur stdDeviation="5"/>
