@@ -6,7 +6,7 @@ const index:NextPage = () => {
   return (
     <>
       <div className="flex justify-between items-end">
-        <p className="font-bold text-3xl">Dashboard</p>
+        <p className="font-bold text-xl md:text-3xl">Dashboard</p>
         <div>
           <p className="text-lg text-gray-600">Welcome,</p>
           <p className="font-semibold text-lg text-gray-700">Samson Samuels</p>
@@ -16,7 +16,7 @@ const index:NextPage = () => {
         <hr />
       </div>
 
-      <div className="grid grid-cols-3 grid-flow-col gap-20">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 md:gap-20">
         <div className="dashboard_card">
           <Image src={"/svg/approved.svg"} alt="approved icon" width={70} height={70} />
           <div className="flex justify-between mt-5">
