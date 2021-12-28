@@ -5,7 +5,7 @@ const InvestorSidebar:NextPage = () => {
   return (
     <nav className="mt-20">
 			<div className="flex flex-col justify-center mx-5">
-				<Link passHref={true} href={"/dashboard"}>
+				<Link passHref={true} href={"/dashboard/investor"}>
 					<a
 						className="nav_item"
 					>
@@ -31,7 +31,7 @@ const InvestorSidebar:NextPage = () => {
 						</span>
 					</a>
 				</Link>
-				<Link passHref={true} href={"/dashboard/inventor/interested-inventions"}>
+				<Link passHref={true} href={"/dashboard/investor/interested-inventions"}>
 					<a
 						className="nav_item"
 					>
@@ -43,7 +43,7 @@ const InvestorSidebar:NextPage = () => {
 						<span className="mx-4 font-bold">Interested Inventions</span>
 					</a>
 				</Link>
-				<Link passHref={true} href={"/dashboard/inventor/invested-inventions"}>
+				<Link passHref={true} href={"/dashboard/investor/invested-inventions"}>
 					<a
 						className="nav_item"
 						href="#"

@@ -15,6 +15,15 @@ const Dashboard: NextPage = ({children}) => {
 		setShowNavbar(!showNavbar);
 	}
 
+	const handleTopActionButton = () => {
+		console.log('clicked')
+		router.pathname.includes('investor') ? 
+		router.push('/dashboard/investor/interested-inventions') 
+		: router.push('/dashboard/inventor/post-invention');
+	}
+
+	const topActionButtonText = router.pathname.includes('investor') ? 'Invest Now' : 'Post Invention';
+
 	useEffect(() => {
 		const handleRouteChange = () => {
 			mobileMode ? setShowNavbar(false) : () => {};
@@ -72,20 +81,20 @@ const Dashboard: NextPage = ({children}) => {
 										{
 											mobileMode ? 
 											(
-												<div className="flex flex-col text-center justify-center">
+												<div className="flex flex-col text-center justify-center cursor-pointer" onClick={handleTopActionButton}>
 													<button className="flex justify-center align-baseline items-end">
 														<AddButton />
 													</button>
-													<p className="text-gray-500">Post Invention</p>
+													<p className="text-gray-500">{topActionButtonText}</p>
 												</div>
 											) :
 											(
 												<>
-													<div className="flex flex-col text-center justify-center mx-4">
+													<div className="flex flex-col text-center justify-center mx-4 cursor-pointer" onClick={handleTopActionButton}>
 														<button className="flex justify-center align-baseline items-end">
 															<AddButton />
 														</button>
-														<p className="text-gray-500">Post Invention</p>
+														<p className="text-gray-500">{topActionButtonText}</p>
 													</div>
 													<button className="mx-5">
 														<Image src={'/svg/notification_badge.svg'} height={20} width={20} alt="notification badge" />
