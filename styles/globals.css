@@ -40,3 +40,11 @@
 .dashboard_table-th {
   @apply px-6 py-3 text-left text-xs font-medium text-indigo-400 uppercase tracking-wider;
 }
+
+.active_tab {
+  @apply border rounded p-2.5 text-primary font-semibold border-b-transparent text-sm sm:text-base ;
+}
+
+.inactive_tab {
+  @apply border-b p-2.5 text-sm sm:text-base;
+}

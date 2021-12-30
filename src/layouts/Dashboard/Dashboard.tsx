@@ -48,10 +48,17 @@ const Dashboard: NextPage = ({children}) => {
 			</Head>
 			<main className="bg-white h-screen overflow-hidden relative">
 				<div className="flex items-start justify-between">
-					<div className={`${showNavbar ? 'lg:block' : 'hidden'} h-screen relative max-w-xs min-w-19`}>
+					<div className={`${showNavbar ? 'lg:block' : 'hidden'} h-screen z-50 max-w-xs min-w-19 md:relative absolute`}>
 						<div className="h-full bg-gray-100">
 							<div className="flex items-center justify-start pt-6 ml-8">
 								<Image src={'/images/Inventors_logo.png'} width={120} height={30} alt="logo" />
+								<div className="block lg:hidden ml-auto mr-2">
+									{
+										mobileMode && showNavbar ? <button onClick={toggleNavbar} className="flex p-2 items-center rounded-full bg-white shadow text-gray-500 text-md">
+											<i className='bx bx-chevron-left' style={{color: "#afafa5", fontSize: "1.8rem"}} />
+										</button> : <></>
+									}
+								</div>
 							</div>
 							<DashboardSidebar />
 						</div>
