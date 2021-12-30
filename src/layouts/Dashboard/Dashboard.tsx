@@ -3,7 +3,6 @@ import type { NextPage } from "next";
 import Image from "next/image";
 import AddButton from "../../../public/svg/AddButton";
 import DashboardSidebar from "../shared/DashboardSidebar";
-import Head from 'next/head'
 import {useRouter} from 'next/router';
 
 const Dashboard: NextPage = ({children}) => {
@@ -16,7 +15,6 @@ const Dashboard: NextPage = ({children}) => {
 	}
 
 	const handleTopActionButton = () => {
-		console.log('clicked')
 		router.pathname.includes('investor') ? 
 		router.push('/dashboard/investor/interested-inventions') 
 		: router.push('/dashboard/inventor/post-invention');
@@ -43,9 +41,6 @@ const Dashboard: NextPage = ({children}) => {
 
 	return (
 		<>
-			<Head>
-				<link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet' />
-			</Head>
 			<main className="bg-white h-screen overflow-hidden relative">
 				<div className="flex items-start justify-between">
 					<div className={`${showNavbar ? 'lg:block' : 'hidden'} h-screen z-50 max-w-xs min-w-19 md:relative absolute`}>
