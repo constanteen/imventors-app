@@ -4,6 +4,7 @@ import Image from "next/image";
 import AddButton from "../../../public/svg/AddButton";
 import DashboardSidebar from "../shared/DashboardSidebar";
 import {useRouter} from 'next/router';
+import detectMob from "../../utils/checkMobile";
 
 const Dashboard: NextPage = ({children}) => {
 	const [showNavbar, setShowNavbar] = useState(false);
@@ -30,7 +31,7 @@ const Dashboard: NextPage = ({children}) => {
 		router.events.on('routeChangeComplete', handleRouteChange);
 
 		// @ts-ignore
-		navigator?.userAgentData?.mobile ? setMobileMode(true) : setMobileMode(false);
+		detectMob() ? setMobileMode(true) : setMobileMode(false);
 
 		mobileMode ? setShowNavbar(false) : setShowNavbar(true);
 

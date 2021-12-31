@@ -1,5 +1,4 @@
 import type { NextPage } from 'next';
-import LandingPage from '../src/layouts/LandingPage/LandingPage';
 
 const Home: NextPage = () => {
 	return (

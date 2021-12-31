@@ -2,7 +2,7 @@ import { NextPage } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
-const register:NextPage = () => {
+const InvestorRegistration:NextPage = () => {
 
   return (
     <main className="flex max-h-screen overflow-hidden">
@@ -55,10 +55,10 @@ const register:NextPage = () => {
       </section>
       <section className="w-1/2 bg-gray-100 h-screen hidden md:block">
         <p className="px-32 mt-12 leading-8">
-          Do you have an idea and, you need potential investors to sponsor such ideas? Sign up and publish your ideas on this platform.
+          Are you looking for a smart way to invest? Why not invest in our ideas that will regenerate maximum ROI
         </p>
         <div className="flex justify-center">
-          <Image src="/images/register_illustration.svg" height={600} width={700} objectFit="contain" alt="login image" />
+          <Image src="/images/investor_register_illustration.svg" height={600} width={700} objectFit="contain" alt="login image" />
         </div>
       </section>
     </main>
@@ -66,4 +66,4 @@ const register:NextPage = () => {
 
 }
 
-export default register;
+export default InvestorRegistration;
