@@ -1,6 +1,7 @@
-import type { ReactElement } from "react";
+import { ReactElement, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import AccountDialogBox from "../../components/General/AccountDialogBox";
 
 const HomeNavbar = (): ReactElement => {
 	return (
@@ -13,7 +14,7 @@ const HomeNavbar = (): ReactElement => {
 								<a className="flex-shrink-0">
 									<Image
 										className="h-8 w-8"
-										src="/images/Inventors_logo.png"
+										src="/inventors_logo.png"
 										width={100}
 										height={20}
 										alt="Workflow"
@@ -24,51 +25,33 @@ const HomeNavbar = (): ReactElement => {
 								<div className="ml-10 flex items-baseline space-x-4">
 									<Link href={"/"}>
 										<a
-											className="text-gray-400  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+											className="text-gray-400  hover:text-gray-900 hover:font-semibold dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium"
 										>
 										Home
 									</a>
 									</Link>
 									<Link href={"/about-us"}>
 										<a
-											className="text-gray-400 dark:text-white  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+											className="text-gray-400 dark:text-white hover:text-gray-900 hover:font-semibold dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium"
 										>
 											About Us
 										</a>
 									</Link>
 									<Link href={"/inventions"}>
 										<a
-											className="text-gray-400  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+											className="text-gray-400  hover:text-gray-900 hover:font-semibold dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium"
 										>
 											Inventions
 										</a>
 									</Link>
 									<Link href={"/contact"}>
 										<a
-											className="text-gray-400  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+											className="text-gray-400  hover:text-gray-900 hover:font-semibold dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium"
 										>
 											Contact Us
 										</a>
 									</Link>
-									<div className="relative">
-										<button className="text-primary border-primary border-2 rounded-xl py-1 px-3 text-sm flex items-center">
-											Account
-											<i className='bx bx-chevron-down text-primary ml-2' />
-										</button>
-										<div className="origin-top-right absolute right-0  mt-2 w-56 rounded-xl shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabIndex={-1}>
-											<div className="py-1" role="none">
-												<Link href="/auth/login">
-													<a className="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabIndex={-1} id="menu-item-0">Login</a>
-												</Link>
-												<Link href="/auth/inventor-registration">
-													<a className="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabIndex={-1} id="menu-item-0">Register As Inventor</a>
-												</Link>
-												<Link href="/auth/investor-registration">
-													<a className="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabIndex={-1} id="menu-item-0">Register As Investor</a>
-												</Link>
-											</div>
-										</div>
-									</div>
+									<AccountDialogBox />
 								</div>
 							</div>
 						</div>
