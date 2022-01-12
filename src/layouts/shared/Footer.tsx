@@ -4,7 +4,7 @@ import Image from 'next/image';
 const Footer: NextPage = () => {
 	return (
 		<footer className="bg-primary pt-4 pb-8 xl:pt-8">
-			<div className="grid grid-cols-1 md:grid-cols-2 md:px-48 px-4 pt-10 sm:pt-12 ">
+			<div className="grid grid-cols-1 md:grid-cols-2 md:px-8 lg:px-48 px-4 pt-10 sm:pt-12 ">
 				<div className="flex justify-evenly flex-col px-3 md:px-20 order-2 md:order-1 mt-10 md:mt-0">
           <div className="flex sm:w-1/2 w-full">
             <Image
