@@ -82,28 +82,28 @@ const HomeNavbar = (): ReactElement => {
 					<div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 flex flex-col">
 						<Link href={"/"}>
 							<a
-								className="text-gray-400  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+								className={`text-gray-400  hover:text-gray-900 hover:font-semibold dark:hover:text-white px-3 py-2 rounded-md text-sm ${router.pathname === '/contact' ? 'text-gray-900 font-semibold' : 'font-medium'}`}
 							>
 							Home
 						</a>
 						</Link>
 						<Link href={"/about-us"}>
 							<a
-								className="text-gray-400 dark:text-white  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+								className={`text-gray-400  hover:text-gray-900 hover:font-semibold dark:hover:text-white px-3 py-2 rounded-md text-sm ${router.pathname === '/contact' ? 'text-gray-900 font-semibold' : 'font-medium'}`}
 							>
 								About Us
 							</a>
 						</Link>
 						<Link href={"/inventions"}>
 							<a
-								className="text-gray-400  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+								className={`text-gray-400  hover:text-gray-900 hover:font-semibold dark:hover:text-white px-3 py-2 rounded-md text-sm ${router.pathname === '/contact' ? 'text-gray-900 font-semibold' : 'font-medium'}`}
 							>
 								Inventions
 							</a>
 						</Link>
 						<Link href={"/contact"}>
 							<a
-								className="text-gray-400  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+								className={`text-gray-400  hover:text-gray-900 hover:font-semibold dark:hover:text-white px-3 py-2 rounded-md text-sm ${router.pathname === '/contact' ? 'text-gray-900 font-semibold' : 'font-medium'}`}
 							>
 								Contact Us
 							</a>
