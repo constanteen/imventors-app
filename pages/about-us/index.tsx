@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 const About: NextPage = () => {
 	return (
-    <div>
+    <>
       <div className="bg-primary my-5 w-screen">
         <div className="flex justify-center items-center flex-col py-20 text-white">
           <h1 className="font-extrabold text-4xl mb-3">About Us</h1>
@@ -41,7 +41,7 @@ const About: NextPage = () => {
         </div>
         <Image src="/images/about-2.png" width={500} height={600} objectFit="contain" alt="ladies looking down" />
       </div>
-    </div>
+    </>
 	);
 };
 

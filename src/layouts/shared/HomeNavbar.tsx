@@ -2,8 +2,12 @@ import { ReactElement, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import AccountDialogBox from "../../components/General/AccountDialogBox";
+import { useRouter } from "next/router";
 
 const HomeNavbar = (): ReactElement => {
+	const [toggleNavbar, setToggleNavbar] = useState(false);
+	const router = useRouter();
+
 	return (
 		<div>
 			<nav className="bg-white dark:bg-gray-800">
@@ -17,7 +21,7 @@ const HomeNavbar = (): ReactElement => {
 										src="/inventors_logo.png"
 										width={100}
 										height={20}
-										alt="Workflow"
+										alt="workflow"
 									/>
 								</a>
 							</Link>
@@ -25,28 +29,28 @@ const HomeNavbar = (): ReactElement => {
 								<div className="ml-10 flex items-baseline space-x-4">
 									<Link href={"/"}>
 										<a
-											className="text-gray-400  hover:text-gray-900 hover:font-semibold dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+											className={`text-gray-400  hover:text-gray-900 hover:font-semibold dark:hover:text-white px-3 py-2 rounded-md text-sm ${router.pathname === '/' ? 'text-gray-900 font-semibold' : 'font-medium'}`}
 										>
 										Home
 									</a>
 									</Link>
 									<Link href={"/about-us"}>
 										<a
-											className="text-gray-400 dark:text-white hover:text-gray-900 hover:font-semibold dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+											className={`text-gray-400  hover:text-gray-900 hover:font-semibold dark:hover:text-white px-3 py-2 rounded-md text-sm ${router.pathname === '/about-us' ? 'text-gray-900 font-semibold' : 'font-medium'}`}
 										>
 											About Us
 										</a>
 									</Link>
 									<Link href={"/inventions"}>
 										<a
-											className="text-gray-400  hover:text-gray-900 hover:font-semibold dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+											className={`text-gray-400  hover:text-gray-900 hover:font-semibold dark:hover:text-white px-3 py-2 rounded-md text-sm ${router.pathname === '/inventions' ? 'text-gray-900 font-semibold' : 'font-medium'}`}
 										>
 											Inventions
 										</a>
 									</Link>
 									<Link href={"/contact"}>
 										<a
-											className="text-gray-400  hover:text-gray-900 hover:font-semibold dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+											className={`text-gray-400  hover:text-gray-900 hover:font-semibold dark:hover:text-white px-3 py-2 rounded-md text-sm ${router.pathname === '/contact' ? 'text-gray-900 font-semibold' : 'font-medium'}`}
 										>
 											Contact Us
 										</a>
@@ -58,7 +62,7 @@ const HomeNavbar = (): ReactElement => {
 						<div className="block">
 							<div className="ml-4 flex items-center md:ml-6"></div>
 						</div>
-						<div className="-mr-2 flex md:hidden">
+						<div className="-mr-2 flex md:hidden" onClick={() => setToggleNavbar(!toggleNavbar)}>
 							<button className="text-gray-800 dark:text-white hover:text-gray-300 inline-flex items-center justify-center p-2 rounded-md focus:outline-none">
 								<svg
 									width="20"
@@ -74,8 +78,8 @@ const HomeNavbar = (): ReactElement => {
 						</div>
 					</div>
 				</div>
-				<div className="md:hidden">
-					<div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+				<div className={`absolute bg-white w-full z-50 md:hidden ${toggleNavbar ? 'block' : 'hidden'}`}>
+					<div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 flex flex-col">
 						<Link href={"/"}>
 							<a
 								className="text-gray-400  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium"
