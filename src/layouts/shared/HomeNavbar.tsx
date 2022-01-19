@@ -19,8 +19,8 @@ const HomeNavbar = (): ReactElement => {
 									<Image
 										className="h-8 w-8"
 										src="/inventors_logo.png"
-										width={100}
-										height={20}
+										width={180}
+										height={40}
 										alt="workflow"
 									/>
 								</a>
@@ -29,28 +29,28 @@ const HomeNavbar = (): ReactElement => {
 								<div className="ml-10 flex items-baseline space-x-4">
 									<Link href={"/"}>
 										<a
-											className={`text-gray-400  hover:text-gray-900 hover:font-semibold dark:hover:text-white px-3 py-2 rounded-md text-sm ${router.pathname === '/' ? 'text-gray-900 font-semibold' : 'font-medium'}`}
+											className={`text-gray-400  hover:text-gray-900 hover:font-semibold px-3 py-2 rounded-md text-sm ${router.pathname === '/' ? 'text-gray-900 font-semibold' : 'font-medium'}`}
 										>
 										Home
 									</a>
 									</Link>
 									<Link href={"/about-us"}>
 										<a
-											className={`text-gray-400  hover:text-gray-900 hover:font-semibold dark:hover:text-white px-3 py-2 rounded-md text-sm ${router.pathname === '/about-us' ? 'text-gray-900 font-semibold' : 'font-medium'}`}
+											className={`text-gray-400  hover:text-gray-900 hover:font-semibold px-3 py-2 rounded-md text-sm ${router.pathname === '/about-us' ? 'text-gray-900 font-semibold' : 'font-medium'}`}
 										>
 											About Us
 										</a>
 									</Link>
 									<Link href={"/inventions"}>
 										<a
-											className={`text-gray-400  hover:text-gray-900 hover:font-semibold dark:hover:text-white px-3 py-2 rounded-md text-sm ${router.pathname === '/inventions' ? 'text-gray-900 font-semibold' : 'font-medium'}`}
+											className={`text-gray-400  hover:text-gray-900 hover:font-semibold px-3 py-2 rounded-md text-sm ${router.pathname === '/inventions' ? 'text-gray-900 font-semibold' : 'font-medium'}`}
 										>
 											Inventions
 										</a>
 									</Link>
 									<Link href={"/contact"}>
 										<a
-											className={`text-gray-400  hover:text-gray-900 hover:font-semibold dark:hover:text-white px-3 py-2 rounded-md text-sm ${router.pathname === '/contact' ? 'text-gray-900 font-semibold' : 'font-medium'}`}
+											className={`text-gray-400  hover:text-gray-900 hover:font-semibold px-3 py-2 rounded-md text-sm ${router.pathname === '/contact' ? 'text-gray-900 font-semibold' : 'font-medium'}`}
 										>
 											Contact Us
 										</a>

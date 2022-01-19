@@ -1,12 +1,13 @@
 import type { NextPage } from 'next';
+import InventorsHero from '../src/components/LandingPage/InventorsHero';
+import InventorsMobile from '../src/components/LandingPage/InventorsMobile';
 
 const Home: NextPage = () => {
 	return (
-    <div>
-      <h1 className="text-2xl">
-        Landing Page
-      </h1>
-    </div>
+		<div>
+      <InventorsHero />
+      <InventorsMobile />
+		</div>
 	);
 };
 

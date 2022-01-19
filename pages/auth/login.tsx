@@ -7,6 +7,11 @@ const login:NextPage = () => {
   return (
     <main className="flex max-h-screen overflow-hidden">
       <section className="w-full md:w-1/2">
+        <div className="pt-3 ml-5 mb-0 hover:text-primary">
+          <Link href={"/"}>
+            &larr; Back to Homepage
+          </Link>
+        </div>
         <div className="flex justify-center items-center h-full w-full flex-col mt-10 md:mt-0">
           <div className="flex flex-col w-11/12 sm:w-3/4 lg:w-1/2 h-full md:h-auto items-center">
             <div className="flex w-full justify-between items-end">
