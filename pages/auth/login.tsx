@@ -1,8 +1,46 @@
 import { NextPage } from "next";
+import { ChangeEvent, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { signIn } from "next-auth/react";
+import { ILoginDetails } from "../../lib/types";
 
-const login:NextPage = () => {
+const Login:NextPage = () => {
+  const [userDetails, setUserDetails] = useState<ILoginDetails>({email: "", password: ""});
+  const [inputErrors, setInputErrors] = useState<ILoginDetails>({email: "", password: ""});
+  const [isLoading, setIsLoading] = useState(false);
+  const handleTextUpdate = (e: ChangeEvent<HTMLInputElement>) => {
+    setUserDetails((prevState) => {
+      return {
+        ...prevState,
+        [e.target.name]: e.target.value,
+      }
+    });
+    setInputErrors({email: "", password: ""});
+  }
+
+  const checkErrors = ():ILoginDetails => {
+    const errors = {} as ILoginDetails;
+    if (!userDetails.email || !userDetails.email.includes('@')) errors.email = "Please enter a valid email address";
+    if (!userDetails.password || userDetails.password.length < 6) errors.password = "Password is too short";
+    return errors;
+  }
+
+  const submit = () => {
+    const errors = checkErrors();
+
+    if (Object.values(errors).length > 0) {
+      setInputErrors(errors);
+      return;
+    }
+
+    signIn("credentials", {email: userDetails.email, password: userDetails.password, redirect: false})
+    .then(response => console.log(response))
+    .catch(error => console.error(error.response))
+    .finally(() => setIsLoading(false))
+
+    // console.log(userDetails);
+  }
 
   return (
     <main className="flex max-h-screen overflow-hidden">
@@ -18,15 +56,35 @@ const login:NextPage = () => {
               <p className="text-xl font-semibold">Sign In</p>
             </div>
             <div className="w-full my-5 md:mb-0">
-              <input className="login_formInput" id="email" type="text" placeholder="Email Address" />
+              <input 
+                name="email"
+                className="login_formInput" 
+                onChange={(e) => handleTextUpdate(e)} 
+                id="email" 
+                type="text" 
+                placeholder="Email Address" 
+                value={userDetails.email}
+              />
+              <span className="text-red-500 text-xs text-center mt-2">{inputErrors.email}</span>
             </div>
             <div className="w-full my-5 md:mb-0">
-              <input className="login_formInput" id="password" type="password" placeholder="Password" />
+              <input 
+                className="login_formInput" 
+                onChange={(e) => handleTextUpdate(e)}
+                id="password"
+                type="password" 
+                placeholder="Password"
+                name="password" 
+                value={userDetails.password}
+              />
+              <span className="text-red-500 text-xs text-center mt-2">{inputErrors.password}</span>
             </div>
             <div className="flex justify-end ml-auto text-sm mb-5 mt-2">
               <p className="text-gray-400 hover:underline cursor-pointer">Forgot Password?</p>
             </div>
-            <button className="p-3 w-full rounded-xl bg-primary text-white border border-primary hover:text-primary font-semibold hover:bg-white">Sign In</button>
+            <button onClick={submit} className={`register_button ${isLoading ? 'pointer-events-none' : ''}`}>
+              {isLoading ? "Loading..." : "Sign In"}
+            </button>
             <div className="my-8 w-full flex items-center justify-center">
               <span className="h-0.5 w-full inline-block bg-gray-200"></span>
               &nbsp;&nbsp;&nbsp;<span className="text-sm flex">Or&nbsp;continue&nbsp;with</span>&nbsp;&nbsp;&nbsp;
@@ -68,4 +126,4 @@ const login:NextPage = () => {
 
 }
 
-export default login;
+export default Login;

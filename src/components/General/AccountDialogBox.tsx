@@ -18,7 +18,7 @@ export default function AccountDialogBox(): ReactElement {
   }, [accountDialogBox])
 
 	return (
-		<div className="relative">
+		<div className="relative z-40">
 			<button onClick={() => setaccountDialogBox(!accountDialogBox)} className="text-primary border-primary border-2 rounded-xl py-1 px-3 text-sm flex items-center">
 				Account
 				<i className="bx bx-chevron-down text-primary ml-2" />
