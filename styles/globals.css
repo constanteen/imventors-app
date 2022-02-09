@@ -56,3 +56,10 @@
 .register_button {
   @apply p-3 mt-5 w-full rounded-xl bg-primary text-white border border-primary hover:text-primary font-semibold hover:bg-white;
 }
+
+.absoluteCenter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

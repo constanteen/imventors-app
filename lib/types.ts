@@ -14,3 +14,14 @@ export interface IRegistrationDetails {
   roles?: number;
   confirm_agreement?: boolean;
 }
+
+export interface LoggedInUser {
+  access_token: string;
+  refresh_token: string;
+  user: {
+    pk: number;
+    email: string;
+    first_name: string;
+    last_name: String;
+  }
+}

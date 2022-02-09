@@ -4,11 +4,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { ILoginDetails } from "../../lib/types";
+import LoginSuccessfulToast from "../../src/components/General/LogInSuccessfulToast";
 
 const Login:NextPage = () => {
   const [userDetails, setUserDetails] = useState<ILoginDetails>({email: "", password: ""});
   const [inputErrors, setInputErrors] = useState<ILoginDetails>({email: "", password: ""});
   const [isLoading, setIsLoading] = useState(false);
+  const [showSuccessToast, setShowSuccessToast] = useState(false);
+
   const handleTextUpdate = (e: ChangeEvent<HTMLInputElement>) => {
     setUserDetails((prevState) => {
       return {
@@ -34,12 +37,9 @@ const Login:NextPage = () => {
       return;
     }
 
-    signIn("credentials", {email: userDetails.email, password: userDetails.password, redirect: false})
-    .then(response => console.log(response))
-    .catch(error => console.error(error.response))
-    .finally(() => setIsLoading(false))
+    setIsLoading(true);
 
-    // console.log(userDetails);
+    signIn("credentials", {email: userDetails.email, password: userDetails.password, redirect: true});
   }
 
   return (
@@ -121,6 +121,7 @@ const Login:NextPage = () => {
           <Image src="/images/login_illustration.svg" height={800} width={800} objectFit="contain" alt="login image" />
         </div>
       </section>
+      <LoginSuccessfulToast show={showSuccessToast} />
     </main>
   )
 
