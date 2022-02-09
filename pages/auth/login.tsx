@@ -1,45 +1,23 @@
 import { NextPage } from "next";
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { ILoginDetails } from "../../lib/types";
-import LoginSuccessfulToast from "../../src/components/General/LogInSuccessfulToast";
+import { useForm } from "react-hook-form";
 
 const Login:NextPage = () => {
-  const [userDetails, setUserDetails] = useState<ILoginDetails>({email: "", password: ""});
-  const [inputErrors, setInputErrors] = useState<ILoginDetails>({email: "", password: ""});
+  const {register, handleSubmit, formState: { errors }} = useForm({defaultValues: {
+    email: "",
+    password: "",
+  }});
   const [isLoading, setIsLoading] = useState(false);
-  const [showSuccessToast, setShowSuccessToast] = useState(false);
 
-  const handleTextUpdate = (e: ChangeEvent<HTMLInputElement>) => {
-    setUserDetails((prevState) => {
-      return {
-        ...prevState,
-        [e.target.name]: e.target.value,
-      }
-    });
-    setInputErrors({email: "", password: ""});
-  }
-
-  const checkErrors = ():ILoginDetails => {
-    const errors = {} as ILoginDetails;
-    if (!userDetails.email || !userDetails.email.includes('@')) errors.email = "Please enter a valid email address";
-    if (!userDetails.password || userDetails.password.length < 6) errors.password = "Password is too short";
-    return errors;
-  }
-
-  const submit = () => {
-    const errors = checkErrors();
-
-    if (Object.values(errors).length > 0) {
-      setInputErrors(errors);
-      return;
-    }
-
+  const submit = (data: ILoginDetails) => {
     setIsLoading(true);
-
-    signIn("credentials", {email: userDetails.email, password: userDetails.password, redirect: true});
+    signIn("credentials", {...data, redirect: true})
+    .catch((e) => console.error(e))
+    .finally(() => setIsLoading(false))
   }
 
   return (
@@ -51,40 +29,41 @@ const Login:NextPage = () => {
           </Link>
         </div>
         <div className="flex justify-center items-center h-full w-full flex-col mt-10 md:mt-0">
-          <div className="flex flex-col w-11/12 sm:w-3/4 lg:w-1/2 h-full md:h-auto items-center">
+          <form className="flex flex-col w-11/12 sm:w-3/4 lg:w-1/2 h-full md:h-auto items-center" onSubmit={handleSubmit(submit)}>
             <div className="flex w-full justify-between items-end">
               <p className="text-xl font-semibold">Sign In</p>
             </div>
-            <div className="w-full my-5 md:mb-0">
-              <input 
-                name="email"
-                className="login_formInput" 
-                onChange={(e) => handleTextUpdate(e)} 
-                id="email" 
-                type="text" 
-                placeholder="Email Address" 
-                value={userDetails.email}
-              />
-              <span className="text-red-500 text-xs text-center mt-2">{inputErrors.email}</span>
-            </div>
-            <div className="w-full my-5 md:mb-0">
-              <input 
-                className="login_formInput" 
-                onChange={(e) => handleTextUpdate(e)}
-                id="password"
-                type="password" 
-                placeholder="Password"
-                name="password" 
-                value={userDetails.password}
-              />
-              <span className="text-red-500 text-xs text-center mt-2">{inputErrors.password}</span>
-            </div>
-            <div className="flex justify-end ml-auto text-sm mb-5 mt-2">
-              <p className="text-gray-400 hover:underline cursor-pointer">Forgot Password?</p>
-            </div>
-            <button onClick={submit} className={`register_button ${isLoading ? 'pointer-events-none' : ''}`}>
-              {isLoading ? "Loading..." : "Sign In"}
-            </button>
+              <div className="w-full my-5 md:mb-0">
+                <input 
+                  {...register("email", {required: true, pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/})}
+                  className="login_formInput" 
+                  id="email" 
+                  type="text" 
+                  placeholder="Email Address" 
+                />
+                <span className="text-red-500 text-xs text-center mt-2">
+                  {errors.email?.type === 'required' && "Email is required" || errors.email?.type === 'pattern' && "Email is invalid"}
+                </span>
+              </div>
+              <div className="w-full my-5 md:mb-0">
+                <input 
+                  {...register("password", {required: true,})}
+                  className="login_formInput" 
+                  id="password"
+                  type="password" 
+                  placeholder="Password"
+                  name="password" 
+                />
+                <span className="text-red-500 text-xs text-center mt-2">
+                  {errors.password?.type === 'required' && "Password is required"}
+                </span>
+              </div>
+              <div className="flex justify-end ml-auto text-sm mb-5 mt-2">
+                <p className="text-gray-400 hover:underline cursor-pointer">Forgot Password?</p>
+              </div>
+              <button onClick={handleSubmit(submit)} className={`register_button ${isLoading ? 'pointer-events-none' : ''}`}>
+                {isLoading ? "Loading..." : "Sign In"}
+              </button>
             <div className="my-8 w-full flex items-center justify-center">
               <span className="h-0.5 w-full inline-block bg-gray-200"></span>
               &nbsp;&nbsp;&nbsp;<span className="text-sm flex">Or&nbsp;continue&nbsp;with</span>&nbsp;&nbsp;&nbsp;
@@ -113,7 +92,7 @@ const Login:NextPage = () => {
                 </Link>
               </div>
             </div>
-          </div>
+          </form>
         </div>
       </section>
       <section className="w-1/2 bg-gray-100 h-screen hidden md:block">
@@ -121,7 +100,6 @@ const Login:NextPage = () => {
           <Image src="/images/login_illustration.svg" height={800} width={800} objectFit="contain" alt="login image" />
         </div>
       </section>
-      <LoginSuccessfulToast show={showSuccessToast} />
     </main>
   )
 
