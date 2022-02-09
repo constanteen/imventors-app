@@ -1,5 +1,6 @@
 import { NextPage } from "next";
 import Link from "next/link";
+import { signOut } from 'next-auth/react';
 
 const InvestorSidebar:NextPage = () => {
   return (
@@ -48,7 +49,7 @@ const InvestorSidebar:NextPage = () => {
 						<span className="mx-4 font-bold">Invested Inventions</span>
 					</a>
 				</Link>
-				<Link href="/">
+				<button onClick={() => signOut()}>
 					<a className="nav_item">
 						<span className="text-left">
 							<svg width="20" height="20" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -58,7 +59,7 @@ const InvestorSidebar:NextPage = () => {
 						</span>
 						<span className="mx-4 font-bold">Sign Out</span>
 					</a>
-				</Link>
+				</button>
 			</div>
 		</nav>
   )
