@@ -25,3 +25,18 @@ export interface LoggedInUser {
     last_name: String;
   }
 }
+
+export interface IUserProfile {
+  first_name: string;
+  last_name: string;
+  phone: string;
+  country: string;
+  state: string;
+  company_email: string;
+  company_address: string;
+  head_office: string;
+  hobbies: string;
+  website_url: string;
+  facebook_business: string;
+  linkedin: string;
+}

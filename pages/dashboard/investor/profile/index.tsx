@@ -1,7 +1,17 @@
-import { NextPage } from 'next';
+import { NextPage } from "next";
+import { useForm } from "react-hook-form";
+import UsersProfile from "../../../../src/components/General/UsersProfile";
 
-const index: NextPage = () => {
-  return (<></>)
+const Index: NextPage = () => {
+  const { register, handleSubmit } = useForm();
+
+  const submit = (data: any):void => {
+    console.log(data);
+  }
+
+  return (
+    <UsersProfile register={register} handleSubmit={handleSubmit} submit={submit} />
+  );
 }
 
-export default index; 
+export default Index; 

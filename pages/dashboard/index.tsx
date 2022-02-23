@@ -11,7 +11,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const sess = await getSession(context);
 
   console.log("server sess", sess);
-  if (sess?.role === 6) {
+  if (sess?.role === 7) {
     return {
       redirect: {
         destination: '/dashboard/inventor',
@@ -20,7 +20,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }
   }
 
-  if (sess?.role === 7) {
+  if (sess?.role === 8) {
     return {
       redirect: {
         destination: '/dashboard/investor',

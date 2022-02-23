@@ -54,12 +54,9 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
         return token;
       },
       async session({ session, user, token }) {
-        console.log("sessionToken: ", token);
-        console.log("userToken: ", user);
         session.accessToken = token.accessToken;
         session.refreshToken = token.refreshToken;
         session.role = token.role;
-        console.log('sessssion', session)
         return session;
       },
       redirect({url, baseUrl}) {
