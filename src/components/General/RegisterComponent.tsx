@@ -12,14 +12,14 @@ import { useRouter } from "next/router";
 import { AxiosError } from "axios";
 
 interface IRegisterRole {
-  roleNumber: number;
+  role: string;
 }
 
-export default function RegisterComponent({ roleNumber }: IRegisterRole):ReactElement {
+export default function RegisterComponent({ role }: IRegisterRole):ReactElement {
   const dispatch = useDispatch();
   const router = useRouter();
   const [userDetails, setUserDetails] = useState<IRegistrationDetails>({
-    email: "", password1: "", password2: "", country: "", first_name: "", last_name: "", phone: "", roles: roleNumber, confirm_agreement: true,
+    email: "", password1: "", password2: "", country: "", first_name: "", last_name: "", phone: "", roles: role, confirm_agreement: true,
   });
 
   const [inputErrors, setInputErrors] = useState<IRegistrationDetails>({

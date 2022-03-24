@@ -11,7 +11,7 @@ export interface IRegistrationDetails {
   password2: string;
   country: string;
   phone: string;
-  roles?: number;
+  roles?: string;
   confirm_agreement?: boolean;
 }
 
