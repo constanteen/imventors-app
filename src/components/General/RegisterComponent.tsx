@@ -57,9 +57,7 @@ export default function RegisterComponent({ roleNumber }: IRegisterRole):ReactEl
       if (axios.isAxiosError(error)) {
         const errResp = error as AxiosError;
         // Handle your error type safe here
-        if (errResp.response?.data) {
-          setError(registrationErrorHandler(errResp.response.data));
-        }
+        setError(registrationErrorHandler(errResp?.response));
       }
     } finally {
       setIsLoading(false);

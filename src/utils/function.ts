@@ -1,4 +1,4 @@
-export const registrationErrorHandler = (errResp: {data: any}): string[] => {
+export const registrationErrorHandler = (errResp: any): string[] => {
   const errData = errResp.data;
   const errorArray = [];
   for (let key in errData) {

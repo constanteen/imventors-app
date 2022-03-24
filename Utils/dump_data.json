@@ -1,0 +1,65 @@
+[
+  {
+    "model": "core.userroles",
+    "pk": 1,
+    "fields": {
+      "title": "system_admin"
+    }
+  },
+  {
+    "model": "core.userroles",
+    "pk": 2,
+    "fields": {
+      "title": "admin"
+    }
+  },
+  {
+    "model": "core.userroles",
+    "pk": 3,
+    "fields": {
+      "title": "staff"
+    }
+  },
+  {
+    "model": "core.userroles",
+    "pk": 4,
+    "fields": {
+      "title": "responder"
+    }
+  },
+  {
+    "model": "core.userroles",
+    "pk": 5,
+    "fields": {
+      "title": "expert"
+    }
+  },
+  {
+    "model": "core.userroles",
+    "pk": 6,
+    "fields": {
+      "title": "merchant"
+    }
+  },
+  {
+    "model": "core.userroles",
+    "pk": 7,
+    "fields": {
+      "title": "inventor"
+    }
+  },
+  {
+    "model": "core.userroles",
+    "pk": 8,
+    "fields": {
+      "title": "investor"
+    }
+  },
+  {
+    "model": "core.userroles",
+    "pk": 9,
+    "fields": {
+      "title": "social"
+    }
+  }
+]
