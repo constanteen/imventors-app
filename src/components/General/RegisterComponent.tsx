@@ -48,16 +48,28 @@ export default function RegisterComponent({ role }: IRegisterRole):ReactElement 
     setIsLoading(true);
     
     try {
-      const response = await inventorsClient.post("/auth/registration/", userDetails);
+      if(role === 'inventor'){
+      const response = await inventorsClient.post("http://metroandmeyer.com/api/v1/users/inventors/signup/", userDetails);
       if (response.status === 201 || response.statusText === "Created") {
         dispatch(saveRegisteredEmail(userDetails.email));
         setTimeout(() => router.push('/auth/complete-registration'), 1000);
       }
+      }else{
+        const response = await inventorsClient.post("http://metroandmeyer.com/api/v1/users/investors/signup/", userDetails);
+        if (response.status === 201 || response.statusText === "Created") {
+          dispatch(saveRegisteredEmail(userDetails.email));
+          setTimeout(() => router.push('/auth/complete-registration'), 1000);
+          console.log("created investor");
+          
+        }
+      }
+
+   
     } catch(error) {
       if (axios.isAxiosError(error)) {
         const errResp = error as AxiosError;
         // Handle your error type safe here
-        setError(registrationErrorHandler(errResp?.response));
+        setError(registrationErrorHandler(errResp?.message));
       }
     } finally {
       setIsLoading(false);
@@ -75,7 +87,7 @@ export default function RegisterComponent({ role }: IRegisterRole):ReactElement 
         <div className="flex justify-center items-center h-full w-full flex-col mt-10 md:mt-0">
           <div className="flex flex-col w-11/12 sm:w-3/4 lg:w-1/2 h-full md:h-auto items-center">
             <div className="flex w-full justify-between items-end">
-              <p className="text-xl font-semibold">Create An Inventor Account</p>
+              <p className="text-xl font-semibold capitalize">Create An {role} Account</p>
               <Link href={'/auth/login'}>
                 <a className="font-semibold text-primary">Sign In Here!</a>
               </Link>
