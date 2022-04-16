@@ -3,16 +3,24 @@ export interface ILoginDetails {
   password: string;
 }
 
+// export interface IRegistrationDetails {
+//   email: string;
+//   first_name: string;
+//   last_name: string;
+//   password1: string;
+//   password2: string;
+//   country: string;
+//   phone: string;
+//   roles?: string;
+//   confirm_agreement?: boolean;
+// }
+
 export interface IRegistrationDetails {
-  email: string;
-  first_name: string;
-  last_name: string;
-  password1: string;
-  password2: string;
-  country: string;
-  phone: string;
-  roles?: string;
-  confirm_agreement?: boolean;
+  iv_email: string;
+  iv_firstname: string;
+  iv_lastname: string;
+  iv_password: string;
+  iv_phone: string;
 }
 
 export interface LoggedInUser {
