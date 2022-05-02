@@ -5,19 +5,40 @@ import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { ILoginDetails } from "../../lib/types";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/router";
+
+type SignInResponse = {
+  ok: boolean;
+  status: number;
+  error: string;
+  url: string;
+}
 
 const Login:NextPage = () => {
+  const router = useRouter();
   const {register, handleSubmit, formState: { errors }} = useForm({defaultValues: {
-    email: "",
+    username: "",
     password: "",
   }});
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const submit = (data: ILoginDetails) => {
+  const submit = async (data: ILoginDetails) => {
     setIsLoading(true);
-    signIn("credentials", {...data, redirect: true})
-    .catch((e) => console.error(e))
-    .finally(() => setIsLoading(false))
+    error.length > 0 && setError("");
+    try {
+      const response = await signIn("credentials", { ...data, redirect: false }) as unknown as SignInResponse;
+      if (response?.status === 401 && response?.ok === false) {
+        setError("Invalid login credentials");
+      }
+      if (response?.status === 200 && response?.ok === true) {
+        router.push("/dashboard");
+      }
+    } catch(error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   return (
@@ -35,14 +56,14 @@ const Login:NextPage = () => {
             </div>
               <div className="w-full my-5 md:mb-0">
                 <input 
-                  {...register("email", {required: true, pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/})}
+                  {...register("username")}
                   className="login_formInput" 
-                  id="email" 
+                  id="username" 
                   type="text" 
                   placeholder="Email Address" 
                 />
                 <span className="text-red-500 text-xs text-center mt-2">
-                  {errors.email?.type === 'required' && "Email is required" || errors.email?.type === 'pattern' && "Email is invalid"}
+                  {errors.username?.message}
                 </span>
               </div>
               <div className="w-full my-5 md:mb-0">
@@ -60,6 +81,9 @@ const Login:NextPage = () => {
               </div>
               <div className="flex justify-end ml-auto text-sm mb-5 mt-2">
                 <p className="text-gray-400 hover:underline cursor-pointer">Forgot Password?</p>
+              </div>
+              <div>
+                <span className="text-red-700">{error}</span>
               </div>
               <button onClick={handleSubmit(submit)} className={`register_button ${isLoading ? 'pointer-events-none' : ''}`}>
                 {isLoading ? "Loading..." : "Sign In"}

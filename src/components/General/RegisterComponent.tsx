@@ -19,11 +19,11 @@ export default function RegisterComponent({ role }: IRegisterRole):ReactElement 
   const dispatch = useDispatch();
   const router = useRouter();
   const [userDetails, setUserDetails] = useState<IRegistrationDetails>({
-    iv_email: "", iv_password: "", iv_firstname: "", iv_lastname: "", iv_phone: "",
+    email_address: "", password: "", password2: "", first_name: "", last_name: "", username: "", country: "", phone: ""
   });
 
   const [inputErrors, setInputErrors] = useState<IRegistrationDetails>({
-    iv_email: "", iv_password: "", iv_firstname: "", iv_lastname: "", iv_phone: "",
+    email_address: "", password: "", password2: "", first_name: "", last_name: "", username: "", country: "", phone: ""
   });
   const [error, setError] = useState<String[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -35,11 +35,12 @@ export default function RegisterComponent({ role }: IRegisterRole):ReactElement 
         [e.target.name]: e.target.value,
       }
     });
-    setInputErrors({ iv_email: "", iv_password: "", iv_firstname: "", iv_lastname: "", iv_phone: "",});
+    setInputErrors({ email_address: "", password: "", password2: "", first_name: "", last_name: "", username: "", country: "", phone: "" });
   }
 
   const submit = async() => {
     const errors = checkErrors(userDetails);
+    console.log(errors)
     if (Object.values(errors).length > 0) {
       setInputErrors(errors);
       return;
@@ -48,18 +49,18 @@ export default function RegisterComponent({ role }: IRegisterRole):ReactElement 
     setIsLoading(true);
     
     try {
-      const response = await inventorsClient.post(`/users/${role}/signup/`, userDetails);
-      if (response.status === 201 || response.statusText === "Created") {
-        dispatch(saveRegisteredEmail(userDetails.iv_email));
+      const response = await inventorsClient.post(`/signup/${role}/`, userDetails);
+      console.log(response)
+      if (response.status === 200 && response.statusText === "OK") {
+        dispatch(saveRegisteredEmail(userDetails.email_address));
         setTimeout(() => router.push('/auth/complete-registration'), 1000);
       }
 
-   
     } catch(error) {
       if (axios.isAxiosError(error)) {
         const errResp = error as AxiosError;
         // Handle your error type safe here
-        setError(registrationErrorHandler(errResp?.message));
+        setError(registrationErrorHandler(errResp?.response));
       }
     } finally {
       setIsLoading(false);
@@ -82,36 +83,40 @@ export default function RegisterComponent({ role }: IRegisterRole):ReactElement 
                 <a className="font-semibold text-primary">Sign In Here!</a>
               </Link>
             </div>
+            <div className="w-full my-5 md:mb-0">
+              <input className="login_formInput" name="username" id="username" type="text" placeholder="Username" value={userDetails.username} onChange={(e) => handleTextUpdate(e)} />
+              <span className="text-red-500 text-xs text-center mt-2">{inputErrors.username}</span>
+            </div>
             <div className="w-full my-5 flex gap-2 md:mb-0">
               <div className="w-1/2">
-                <input className="login_formInput" name="iv_firstname" id="first_name" type="text" placeholder="First Name" value={userDetails.iv_firstname} onChange={(e) => handleTextUpdate(e)} />
-                <span className="text-red-500 text-xs text-center mt-2">{inputErrors.iv_firstname}</span>
+                <input className="login_formInput" name="first_name" id="first_name" type="text" placeholder="First Name" value={userDetails.first_name} onChange={(e) => handleTextUpdate(e)} />
+                <span className="text-red-500 text-xs text-center mt-2">{inputErrors.first_name}</span>
               </div>
               <div className="w-1/2">
-                <input className="login_formInput" name="iv_lastname" id="last_name" type="text" placeholder="Last Name" value={userDetails.iv_lastname} onChange={(e) => handleTextUpdate(e)} />
-                <span className="text-red-500 text-xs text-center mt-2">{inputErrors.iv_lastname}</span>
+                <input className="login_formInput" name="last_name" id="last_name" type="text" placeholder="Last Name" value={userDetails.last_name} onChange={(e) => handleTextUpdate(e)} />
+                <span className="text-red-500 text-xs text-center mt-2">{inputErrors.last_name}</span>
               </div>
             </div>
             <div className="w-full my-5 md:mb-0">
-              <input className="login_formInput" name="iv_email" id="email" type="text" placeholder="Email Address" value={userDetails.iv_email} onChange={(e) => handleTextUpdate(e)} />
-              <span className="text-red-500 text-xs text-center mt-2">{inputErrors.iv_email}</span>
+              <input className="login_formInput" name="email_address" id="email" type="text" placeholder="Email Address" value={userDetails.email_address} onChange={(e) => handleTextUpdate(e)} />
+              <span className="text-red-500 text-xs text-center mt-2">{inputErrors.email_address}</span>
             </div>
             <div className="w-full my-5 md:mb-0">
-              <input className="login_formInput" name="iv_phone" id="phone" type="tel" placeholder="Phone Number" value={userDetails.iv_phone} onChange={(e) => handleTextUpdate(e)}/>
-              <span className="text-red-500 text-xs text-center mt-2">{inputErrors.iv_phone}</span>
+              <input className="login_formInput" name="phone" id="phone" type="tel" placeholder="Phone Number" value={userDetails.phone} onChange={(e) => handleTextUpdate(e)}/>
+              <span className="text-red-500 text-xs text-center mt-2">{inputErrors.phone}</span>
             </div>
-            {/* <div className="w-full my-5 md:mb-0">
+            <div className="w-full my-5 md:mb-0">
               <input className="login_formInput" name="country" id="country" type="text" placeholder="Country" value={userDetails.country} onChange={(e) => handleTextUpdate(e)}/>
               <span className="text-red-500 text-xs text-center mt-2">{inputErrors.country}</span>
-            </div> */}
-            <div className="w-full my-5 md:mb-0">
-              <input className="login_formInput" name="iv_password" id="password" type="password" placeholder="Password" value={userDetails.iv_password} onChange={(e) => handleTextUpdate(e)}/>
-              <span className="text-red-500 text-xs text-center mt-2">{inputErrors.iv_password}</span>
             </div>
-            {/* <div className="w-full my-5 md:mb-0">
+            <div className="w-full my-5 md:mb-0">
+              <input className="login_formInput" name="password" id="password" type="password" placeholder="Password" value={userDetails.password} onChange={(e) => handleTextUpdate(e)}/>
+              <span className="text-red-500 text-xs text-center mt-2">{inputErrors.password}</span>
+            </div>
+            <div className="w-full my-5 md:mb-0">
               <input className="login_formInput" name="password2" id="confirmPassword" type="password" placeholder="Confirm Password" value={userDetails.password2} onChange={(e) => handleTextUpdate(e)}/>
               <span className="text-red-500 text-xs text-center mt-2">{inputErrors.password2}</span>
-            </div> */}
+            </div>
             <button onClick={submit} className={`register_button ${isLoading ? 'pointer-events-none' : ''}`}>
               {isLoading ? "Loading..." : "Create Account"}
             </button>

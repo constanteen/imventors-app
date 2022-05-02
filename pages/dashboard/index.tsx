@@ -1,8 +1,9 @@
 import { GetServerSideProps, NextPage } from "next";
 import { getSession } from "next-auth/react";
+import Loader from "../../src/components/General/Loader";
 
 const index:NextPage = () => {
-  return (<div>Redirecting...</div>)
+  return (<Loader />)
 }
 
 export default index;
@@ -11,7 +12,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const sess = await getSession(context);
 
   console.log("server sess", sess);
-  if (sess?.role === 7) {
+  if (sess?.role === "inventor") {
     return {
       redirect: {
         destination: '/dashboard/inventor',
@@ -20,7 +21,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }
   }
 
-  if (sess?.role === 8) {
+  if (sess?.role === "investor") {
     return {
       redirect: {
         destination: '/dashboard/investor',

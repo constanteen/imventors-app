@@ -1,26 +1,19 @@
 export interface ILoginDetails {
-  email: string;
+  username: string;
   password: string;
 }
 
-// export interface IRegistrationDetails {
-//   email: string;
-//   first_name: string;
-//   last_name: string;
-//   password1: string;
-//   password2: string;
-//   country: string;
-//   phone: string;
-//   roles?: string;
-//   confirm_agreement?: boolean;
-// }
-
 export interface IRegistrationDetails {
-  iv_email: string;
-  iv_firstname: string;
-  iv_lastname: string;
-  iv_password: string;
-  iv_phone: string;
+  email_address: string;
+  first_name: string;
+  last_name: string;
+  password: string;
+  password2: string;
+  country: string;
+  phone: string;
+  roles?: string;
+  username: string;
+  confirm_agreement?: boolean;
 }
 
 export interface LoggedInUser {
