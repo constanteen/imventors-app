@@ -1,3 +1,4 @@
+import { AxiosResponse } from "axios";
 import type { NextApiRequest, NextApiResponse } from "next";
 import NextAuth from "next-auth";
 // import GithubProvider from "next-auth/providers/github";
@@ -6,7 +7,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { inventorsClient } from "../../../lib/client";
 
 type loginCredentials = {
-  email: string;
+  username: string;
   password: string;
 }
 
@@ -15,21 +16,18 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
     providers: [
       CredentialsProvider({
         name: "Credentials",
-        credentials: {
-          email: { label: "email", type: "text", placeholder: "Enter Email" },
-          password: { label: "password", type: "password" },
-        },
         // @ts-ignore
         async authorize(credentials: loginCredentials) {
           // Add logic here to look up the user from the credentials supplied
-          const email = credentials.email;
+          const username = credentials.username;
           const password = credentials.password;
           let user = null;
           try {
-            const response = await inventorsClient.post('/auth/login/',  {email, password});
+            const response = await inventorsClient.post('/login/',  { username, password });
             user = response.data;
           } catch(error) {
             console.error(error);
+            return;
           }
           if (user) {
             return user;
@@ -40,28 +38,22 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
       })
     ],
     callbacks: {
-      async jwt({ token, user, account, profile, isNewUser }) {
+      async jwt({ token, user, account }) {
         if (account) {
-          //@ts-ignore
-          token.name = `${user?.user?.first_name} ${user?.user?.last_name}`;
-          //@ts-ignore
-          token.email = user?.user?.email;
-          //@ts-ignore
-          token.role = user?.user?.pk;
-          token.accessToken = user?.access_token;
-          token.refreshToken = user?.refresh_token;
+          token.role = user?.is_inventor ? "inventor" : "investor";
+          token.accessToken = user?.token;
         }
-        return token;
+        return token
       },
-      async session({ session, user, token }) {
+      async session({ session, token }) {
         session.accessToken = token.accessToken;
-        session.refreshToken = token.refreshToken;
         session.role = token.role;
         return session;
       },
-      redirect({url, baseUrl}) {
-        return ("/dashboard");
-      }
-    }
+    },
+    pages: {
+      signIn: '/auth/login',
+      error: '/auth/login',
+    },
   })
 }

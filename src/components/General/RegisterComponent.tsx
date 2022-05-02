@@ -19,11 +19,11 @@ export default function RegisterComponent({ role }: IRegisterRole):ReactElement 
   const dispatch = useDispatch();
   const router = useRouter();
   const [userDetails, setUserDetails] = useState<IRegistrationDetails>({
-    email: "", password1: "", password2: "", country: "", first_name: "", last_name: "", phone: "", roles: role, confirm_agreement: true,
+    email_address: "", password: "", password2: "", first_name: "", last_name: "", username: "", country: "", phone: ""
   });
 
   const [inputErrors, setInputErrors] = useState<IRegistrationDetails>({
-    email: "", password1: "", password2: "", country: "", first_name: "", last_name: "", phone: "",
+    email_address: "", password: "", password2: "", first_name: "", last_name: "", username: "", country: "", phone: ""
   });
   const [error, setError] = useState<String[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -35,11 +35,12 @@ export default function RegisterComponent({ role }: IRegisterRole):ReactElement 
         [e.target.name]: e.target.value,
       }
     });
-    setInputErrors({email: "", password1: "", password2: "", country: "", first_name: "", last_name: "", phone: "",});
+    setInputErrors({ email_address: "", password: "", password2: "", first_name: "", last_name: "", username: "", country: "", phone: "" });
   }
 
   const submit = async() => {
     const errors = checkErrors(userDetails);
+    console.log(errors)
     if (Object.values(errors).length > 0) {
       setInputErrors(errors);
       return;
@@ -48,11 +49,13 @@ export default function RegisterComponent({ role }: IRegisterRole):ReactElement 
     setIsLoading(true);
     
     try {
-      const response = await inventorsClient.post("/auth/registration/", userDetails);
-      if (response.status === 201 || response.statusText === "Created") {
-        dispatch(saveRegisteredEmail(userDetails.email));
+      const response = await inventorsClient.post(`/signup/${role}/`, userDetails);
+      console.log(response)
+      if (response.status === 200 && response.statusText === "OK") {
+        dispatch(saveRegisteredEmail(userDetails.email_address));
         setTimeout(() => router.push('/auth/complete-registration'), 1000);
       }
+
     } catch(error) {
       if (axios.isAxiosError(error)) {
         const errResp = error as AxiosError;
@@ -75,10 +78,14 @@ export default function RegisterComponent({ role }: IRegisterRole):ReactElement 
         <div className="flex justify-center items-center h-full w-full flex-col mt-10 md:mt-0">
           <div className="flex flex-col w-11/12 sm:w-3/4 lg:w-1/2 h-full md:h-auto items-center">
             <div className="flex w-full justify-between items-end">
-              <p className="text-xl font-semibold">Create An Inventor Account</p>
+              <p className="text-xl font-semibold capitalize">Create An {role} Account</p>
               <Link href={'/auth/login'}>
                 <a className="font-semibold text-primary">Sign In Here!</a>
               </Link>
+            </div>
+            <div className="w-full my-5 md:mb-0">
+              <input className="login_formInput" name="username" id="username" type="text" placeholder="Username" value={userDetails.username} onChange={(e) => handleTextUpdate(e)} />
+              <span className="text-red-500 text-xs text-center mt-2">{inputErrors.username}</span>
             </div>
             <div className="w-full my-5 flex gap-2 md:mb-0">
               <div className="w-1/2">
@@ -91,8 +98,8 @@ export default function RegisterComponent({ role }: IRegisterRole):ReactElement 
               </div>
             </div>
             <div className="w-full my-5 md:mb-0">
-              <input className="login_formInput" name="email" id="email" type="text" placeholder="Email Address" value={userDetails.email} onChange={(e) => handleTextUpdate(e)} />
-              <span className="text-red-500 text-xs text-center mt-2">{inputErrors.email}</span>
+              <input className="login_formInput" name="email_address" id="email" type="text" placeholder="Email Address" value={userDetails.email_address} onChange={(e) => handleTextUpdate(e)} />
+              <span className="text-red-500 text-xs text-center mt-2">{inputErrors.email_address}</span>
             </div>
             <div className="w-full my-5 md:mb-0">
               <input className="login_formInput" name="phone" id="phone" type="tel" placeholder="Phone Number" value={userDetails.phone} onChange={(e) => handleTextUpdate(e)}/>
@@ -103,8 +110,8 @@ export default function RegisterComponent({ role }: IRegisterRole):ReactElement 
               <span className="text-red-500 text-xs text-center mt-2">{inputErrors.country}</span>
             </div>
             <div className="w-full my-5 md:mb-0">
-              <input className="login_formInput" name="password1" id="password" type="password" placeholder="Password" value={userDetails.password1} onChange={(e) => handleTextUpdate(e)}/>
-              <span className="text-red-500 text-xs text-center mt-2">{inputErrors.password1}</span>
+              <input className="login_formInput" name="password" id="password" type="password" placeholder="Password" value={userDetails.password} onChange={(e) => handleTextUpdate(e)}/>
+              <span className="text-red-500 text-xs text-center mt-2">{inputErrors.password}</span>
             </div>
             <div className="w-full my-5 md:mb-0">
               <input className="login_formInput" name="password2" id="confirmPassword" type="password" placeholder="Confirm Password" value={userDetails.password2} onChange={(e) => handleTextUpdate(e)}/>

@@ -37,7 +37,7 @@ const About: NextPage = () => {
               creative ideas and talents which cut across commerce, technology, music, 
               fashion, agriculture, crafts, transportation, and other economic sector.
             </p>
-          </div>
+          </div> 
         </div>
         <Image src="/images/about-2.png" width={500} height={600} objectFit="contain" alt="ladies looking down" />
       </div>

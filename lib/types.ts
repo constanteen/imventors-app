@@ -1,17 +1,18 @@
 export interface ILoginDetails {
-  email: string;
+  username: string;
   password: string;
 }
 
 export interface IRegistrationDetails {
-  email: string;
+  email_address: string;
   first_name: string;
   last_name: string;
-  password1: string;
+  password: string;
   password2: string;
   country: string;
   phone: string;
   roles?: string;
+  username: string;
   confirm_agreement?: boolean;
 }
 
