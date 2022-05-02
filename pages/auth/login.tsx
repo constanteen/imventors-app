@@ -60,7 +60,7 @@ const Login:NextPage = () => {
                   className="login_formInput" 
                   id="username" 
                   type="text" 
-                  placeholder="Email Address" 
+                  placeholder="Username" 
                 />
                 <span className="text-red-500 text-xs text-center mt-2">
                   {errors.username?.message}
