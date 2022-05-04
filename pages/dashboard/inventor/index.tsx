@@ -1,11 +1,13 @@
 import { NextPage } from "next";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import { ISession } from "../../../lib/types";
 import DashboardTable from "../../../src/components/tables/DashboardTable";
 
 const Index:NextPage = () => {
   const { data: session } = useSession();
 
+  // @ts-ignore
   const computeName = `${session?.user?.first_name ?? "Fetching"} ${session?.user?.last_name ?? " User..."}`;
 
   return (
