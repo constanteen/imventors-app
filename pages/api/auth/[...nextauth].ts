@@ -46,8 +46,15 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
         return token
       },
       async session({ session, token }) {
+        const response = await inventorsClient.get("/inventor-dash/", {
+          headers: {
+            Authorization: `token ${token?.accessToken}`,
+          }
+        });
+
         session.accessToken = token.accessToken;
         session.role = token.role;
+        session.user = response.data;
         return session;
       },
     },

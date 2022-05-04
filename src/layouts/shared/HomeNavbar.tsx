@@ -79,7 +79,7 @@ const HomeNavbar = (): ReactElement => {
 					</div>
 				</div>
 				<div className={`absolute bg-white w-full z-50 md:hidden ${toggleNavbar ? 'block' : 'hidden'}`}>
-					<div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 flex flex-col">
+					<div className="pt-2 pb-3 space-y-1 sm:px-3 flex flex-col pl-5">
 						<Link href={"/"}>
 							<a
 								className={`text-gray-400  active:hover:text-gray-900 hover:font-semibold px-3 py-2 rounded-md text-sm font-medium`}
@@ -108,6 +108,9 @@ const HomeNavbar = (): ReactElement => {
 								Contact Us
 							</a>
 						</Link>
+						<div className="ml-3">
+							<AccountDialogBox />
+						</div>
 					</div>
 				</div>
 			</nav>

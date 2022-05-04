@@ -57,7 +57,7 @@ const InventorSidebar: NextPage = () => {
 						<span className="mx-2 font-bold">Post Invention</span>
 					</a>
 				</Link>
-				<button onClick={() => signOut()}>
+				<button onClick={() => signOut({ callbackUrl: '/auth/login' })}>
 					<a className="nav_item">
 						<span className="text-left">
 							<svg width="20" height="20" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">

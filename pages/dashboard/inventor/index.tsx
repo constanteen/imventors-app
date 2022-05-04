@@ -1,15 +1,20 @@
 import { NextPage } from "next";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import DashboardTable from "../../../src/components/tables/DashboardTable";
 
-const index:NextPage = () => {
+const Index:NextPage = () => {
+  const { data: session } = useSession();
+
+  const computeName = `${session?.user?.first_name ?? "Fetching"} ${session?.user?.last_name ?? " User..."}`;
+
   return (
     <>
       <div className="flex justify-between items-end">
         <p className="font-bold text-xl md:text-3xl">Dashboard</p>
         <div>
           <p className="text-lg text-gray-600">Welcome,</p>
-          <p className="font-semibold text-lg text-gray-700">Samson Samuels</p>
+          <p className="font-semibold text-lg text-gray-700">{computeName}</p>
         </div>
       </div>
       <div className="my-8">
@@ -51,4 +56,4 @@ const index:NextPage = () => {
   )
 }
 
-export default index;
+export default Index;

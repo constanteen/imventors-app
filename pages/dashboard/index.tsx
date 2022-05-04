@@ -1,5 +1,6 @@
 import { GetServerSideProps, NextPage } from "next";
 import { getSession } from "next-auth/react";
+import { inventorsClient } from "../../lib/client";
 import Loader from "../../src/components/General/Loader";
 
 const index:NextPage = () => {
@@ -10,8 +11,7 @@ export default index;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const sess = await getSession(context);
-
-  console.log("server sess", sess);
+  
   if (sess?.role === "inventor") {
     return {
       redirect: {
