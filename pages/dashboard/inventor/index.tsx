@@ -1,7 +1,6 @@
 import { NextPage } from "next";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import { ISession } from "../../../lib/types";
 import DashboardTable from "../../../src/components/tables/DashboardTable";
 
 const Index:NextPage = () => {
