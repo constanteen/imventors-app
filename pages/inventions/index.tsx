@@ -1,9 +1,16 @@
-import type { NextPage } from 'next';
+
+import {  inventorsClient } from '../../lib/client';
+import { InventionDetail } from '../../lib/types';
 import InventionList from '../../src/components/General/InventionList';
 
 const inventionCategories = ["Entertainment", "Sport", "Handcraft", "Technology", "Medical", "Artifical Intelligence", "Clothing", "Financial Technology", "Engineering", "Aircraft", "Agriculture", "Design"];
 
-const Inventions: NextPage = () => {
+
+interface InventionProps{
+	data:Array<InventionDetail>
+}
+
+const Inventions:React.FC<InventionProps> = ({data:inventions}) => {
 	return (
 		<div className="grid grid-cols-4 gap-4">
 			<div className="bg-gray-50 h-screen border">
@@ -15,7 +22,7 @@ const Inventions: NextPage = () => {
 					<hr />	
 					<div className="p-3 flex flex-wrap">
 						{
-							inventionCategories.map(cat => <span key={cat.toString()} className="px-4 m-1 py-1 text-xs rounded-md border text-gray-800 hover:text-white hover:bg-primary cursor-pointer">{cat}</span>)
+							inventions.map(invention => <span key={invention.id} className="px-4 m-1 py-1 text-xs rounded-md border text-gray-800 hover:text-white hover:bg-primary cursor-pointer">{invention.industry}</span>)
 						}
 					</div>
 				</div>
@@ -27,15 +34,15 @@ const Inventions: NextPage = () => {
 					<hr />	
 					<div className="p-3 flex flex-wrap">
 						{
-							inventionCategories.map(cat => <span key={cat.toString()} className="px-4 m-1 py-1 text-xs rounded-md border text-gray-800 hover:text-white hover:bg-primary cursor-pointer">{cat}</span>)
+							inventions.map(invention => <span key={invention.id} className="px-4 m-1 py-1 text-xs rounded-md border text-gray-800 hover:text-white hover:bg-primary cursor-pointer">{invention.tag}</span>)
 						}
 					</div>
 				</div>
-			</div>
+			</div> 	
 			<div className="col-span-3">
 				<div className="px-10">
 					{
-						[1,2,3,4,5].map((i) => <InventionList key={i} />)
+						inventions.map((invention) => <InventionList invention={invention}  key={invention.id} />)
 					}
 				</div>
 			</div>
@@ -44,3 +51,12 @@ const Inventions: NextPage = () => {
 };
 
 export default Inventions;
+
+export async function getServerSideProps(){
+	const {data} = await inventorsClient.get('/all-inventions/');
+	console.log(data);
+	
+	return {
+		props:{data}
+	}
+}

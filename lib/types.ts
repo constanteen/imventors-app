@@ -41,3 +41,18 @@ export interface IUserProfile {
   facebook_business: string;
   linkedin: string;
 }
+
+export type InventionDetail = {
+	id:number;
+	published_date:string,
+	description:string,
+	invention_name:string,
+	image:string,
+  image1:string,
+  image2:string,
+  image3:string,
+  image4:string,
+  image5:string,
+	tag:string,
+	industry:string,
+}
