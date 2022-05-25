@@ -55,4 +55,7 @@ export type InventionDetail = {
   image5:string,
 	tag:string,
 	industry:string,
+  required_amount: string,
+  equity_per_invest: string,
+  current_budget: string,
 }

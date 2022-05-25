@@ -1,4 +1,5 @@
 
+import { NextPage } from 'next';
 import {  inventorsClient } from '../../lib/client';
 import { InventionDetail } from '../../lib/types';
 import InventionList from '../../src/components/General/InventionList';
@@ -10,7 +11,7 @@ interface InventionProps{
 	data:Array<InventionDetail>
 }
 
-const Inventions:React.FC<InventionProps> = ({data:inventions}) => {
+const Inventions:NextPage<InventionProps> = ({data:inventions}) => {
 	return (
 		<div className="grid grid-cols-4 gap-4">
 			<div className="bg-gray-50 h-screen border">

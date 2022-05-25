@@ -2,19 +2,31 @@ import { ReactElement } from "react";
 import Image from "next/image";
 import { InventionDetail } from "../../../lib/types";
 import moment from "moment";
+import { NextPage } from "next";
 interface InventionListProps{
   invention:InventionDetail
 }
 
- const InventionList:React.FC<InventionListProps> = ({invention})=> {
+ const InventionList:NextPage<InventionListProps> = ({invention})=> {
   const loaderProp =({ src }:any) => {
     return src;
   }
   return (
     <div className="border flex rounded-3xl overflow-hidden my-10">
       <div className="relative w-1/2">
+       
         <Image src={"/images/black-car.png"} objectFit='cover' alt="black car" layout="fill"/>
-      </div>
+        
+<div  className="absolute block px-4 top-4 right-4  bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 ">
+<h5 className="text-xs font-normal leading-4 text-right tracking-tight text-gray-90">Amount</h5>
+<p className="font-black text-sm text-center text-gray-700 leading-4">$100,000</p>
+</div>
+        
+<div  className="absolute block px-4 bottom-5 left-5  bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 ">
+<h5 className="text-xs font-normal leading-4 text-right tracking-tight text-gray-90">Invention</h5>
+<p className="font-black text-sm text-center text-gray-700 leading-4">Electric Car</p>
+</div>
+          </div>
       <div className="flex flex-col">
         <div className="flex justify-between pt-4 px-10 ml-10 items-center">
           <div className="flex flex-col">
@@ -30,7 +42,7 @@ interface InventionListProps{
               <span className="flex items-center"><i className='bx bx-link-external mr-1' /> Visit</span>
             </div>
             <div>
-              <Image src={invention.image} loader={loaderProp} alt="human" width={100} height={100} />
+              <Image src={'/images/big-head.png'} alt="human" width={100} height={100} />
             </div>
           </div>
         </div>
@@ -41,11 +53,11 @@ interface InventionListProps{
         </div>
 
         <div className="flex rounded-xl justify-around items-center flex-wrap md:flex-nowrap ml-14">
-         {invention.image1 &&  <Image src={invention.image} loader={loaderProp}  height={400} width={400} className="object-cover" alt="car 1" /> }
-         {invention.image2 &&  <Image src={invention.image2} loader={loaderProp} height={400} width={400} className="object-cover" alt="car 2" /> }
-         {invention.image3 && <Image src={invention.image3} loader={loaderProp}   height={400} width={400} className="object-cover" alt="car 3" />}
-         {invention.image4 &&<Image src={invention.image4} loader={loaderProp} height={400} width={400} className="object-cover" alt="car 4" />}
-         {invention.image5 &&<Image src={invention.image5} loader={loaderProp}  height={400} width={400} className="object-cover" alt="car 5" />}
+        <Image src={'/images/car-1.png'} height={400} width={400} className="object-cover" alt="car 1" /> 
+        <Image src={'/images/car-2.png'}   height={400} width={400} className="object-cover" alt="car 2" /> 
+       <Image src={'/images/car-3.png'}    height={400} width={400} className="object-cover" alt="car 3" />
+      <Image src={'/images/car-4.png'} height={400} width={400} className="object-cover" alt="car 4" />
+      <Image src={'/images/car-5.png'}   height={400} width={400} className="object-cover" alt="car 5" />
         </div>
       </div>
     </div>
