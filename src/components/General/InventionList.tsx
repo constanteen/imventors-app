@@ -24,7 +24,7 @@ interface InventionListProps{
         
 <div  className="absolute block px-4 bottom-5 left-5  bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 ">
 <h5 className="text-xs font-normal leading-4 text-right tracking-tight text-gray-90">Invention</h5>
-<p className="font-black text-sm text-center text-gray-700 leading-4">Electric Car</p>
+<p className="font-black text-sm text-center text-gray-700 leading-4">{invention.invention_name}</p>
 </div>
           </div>
       <div className="flex flex-col">

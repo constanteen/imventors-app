@@ -55,7 +55,7 @@ export default Inventions;
 
 export async function getServerSideProps(){
 	const {data} = await inventorsClient.get('/all-inventions/');
-	console.log(data);
+	// console.log(data);
 	
 	return {
 		props:{data}
