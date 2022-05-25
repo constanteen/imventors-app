@@ -1,12 +1,15 @@
-import { NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
+import { getSession, useSession } from "next-auth/react";
 import { useForm } from "react-hook-form";
+import { inventorsClient } from "../../../../lib/client";
 import UsersProfile from "../../../../src/components/General/UsersProfile";
 
-const Index: NextPage = () => {
+const Index: React.FC<{}> = () => {
   const { register, handleSubmit } = useForm();
 
-  const submit = (data: any) => {
+  const submit = async(data: any) => {
     console.log(data);
+ 
   }
 
   return (
@@ -15,3 +18,4 @@ const Index: NextPage = () => {
 }
 
 export default Index; 
+
